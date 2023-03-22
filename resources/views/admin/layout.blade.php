@@ -47,11 +47,7 @@
                         <ul class="nav side-menu">
                             <li><a href="{{url('admin/dashboard')}}"><i class="fa fa-home"></i> Dashboard</a>
                             </li>
-                            <li><a href="{{url('admin/project')}}"><i class="fa fa-edit"></i> Sales Person</a>
-                            </li>
-                            <li><a href="{{url('admin/portal')}}"><i class="fa fa-edit"></i> Portal Person</a>
-                            </li>
-                            <li><a href="{{url('admin/purchase')}}"><i class="fa fa-edit"></i> Purchase Person</a>
+                            <li><a href="{{url('admin/users')}}"><i class="fa fa-edit"></i> Users</a>
                             </li>
 
                         </ul>

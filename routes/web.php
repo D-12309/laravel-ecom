@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Admin\User\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('sendSMS', [\App\Http\Controllers\TwilioSMSController::class, 'index']);
+
+
+
+Route::group( ['prefix' => 'admin'], function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
+
+
+
 
 
 
