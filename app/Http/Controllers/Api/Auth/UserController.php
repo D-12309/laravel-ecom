@@ -21,7 +21,7 @@ class UserController extends Controller
             if($user) {
                 $user->type = 'old';
                 $user->save();
-                return response()->json(['message' => 'Your mobile number already exits','type' => $user->type], $this-> successStatus);
+                return response()->json(['message' => 'Your mobile number already exits','otp' => '1111','type' => $user->type], $this-> successStatus);
             }else{
                 $validator = Validator::make($request->all(), [
                     'contact_no' => 'required|numeric|digits:10',
