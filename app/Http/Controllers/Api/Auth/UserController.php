@@ -34,7 +34,7 @@ class UserController extends Controller
                 $user->contact_no = $request->post('contact_no');
                 $user->type = 'new';
                 $user->save();
-                return response()->json(['otp' => '1111','type' => $user->type], $this-> successStatus);
+                return response()->json(['message' => 'Successfully Login','otp' => '1111','type' => $user->type], $this-> successStatus);
             }
         }
         else{
