@@ -49,6 +49,8 @@
                             </li>
                             <li><a href="{{url('admin/users')}}"><i class="fa fa-edit"></i> Users</a>
                             </li>
+                            <li><a href="{{url('admin/categories')}}"><i class="fa fa-edit"></i> Categories</a>
+                            </li>
 
                         </ul>
                     </div>
