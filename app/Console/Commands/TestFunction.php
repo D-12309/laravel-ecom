@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class TestFunction extends Command
 {
@@ -38,6 +39,11 @@ class TestFunction extends Command
      */
     public function handle()
     {
-        dd(Carbon::now()->format('Y-m-d H:i:s'));
+        $name ='20230324145651.jpg';
+        if(Storage::disk('s3')->exists('categories/'.$name)) {
+            Storage::disk('s3')->delete('categories/'.$name);
+            dd('dosne');
+        }
+        dd('done');
     }
 }

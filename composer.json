@@ -12,6 +12,7 @@
         "laravel/passport": "^10.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "realrashid/sweet-alert": "^6.0"
     },
     "require-dev": {

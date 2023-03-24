@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Traits\Helpers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -38,10 +40,10 @@ class CategoryController extends Controller
     public function manage_category_process(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories,name,'.$request->post('id')
+            'name' => 'required|unique:categories,name,' . $request->post('id')
         ]);
         $categoryImage = null;
-
+        $destinationPath = 'categories';
 
         if ($request->post('id') > 0) {
             $category = Category::find($request->post('id'));
@@ -51,12 +53,18 @@ class CategoryController extends Controller
                 $request->validate([
                     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
-                if (file_exists(public_path('image/'.$category->image))) {
-                    unlink('image/'.$category->image);
+
+                if (env('APP_ENV') == 'local') {
+                    if (Storage::disk('s3')->exists($category->image)) {
+                        Storage::disk('s3')->delete($category->image);
+                    }
+                    $categoryImage = Helpers::storeFileInS3($image, $destinationPath);
+                } else {
+                    if (file_exists(public_path($category->image))) {
+                        unlink($category->image);
+                    }
+                    $categoryImage = Helpers::storeFileInLocal($image, $destinationPath);
                 }
-                $destinationPath = 'image/';
-                $categoryImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                $image->move($destinationPath, $categoryImage);
                 $category->image = $categoryImage;
             }
 
@@ -67,10 +75,12 @@ class CategoryController extends Controller
             $category = new Category();
             $msg = "Project saved";
             if ($image = $request->file('image')) {
-
-                $destinationPath = 'image/';
-                $categoryImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-                $image->move($destinationPath, $categoryImage);
+                $destinationPath = 'categories';
+                if (env('APP_ENV') == 'local') {
+                    $categoryImage = Helpers::storeFileInS3($image, $destinationPath);
+                } else {
+                    $categoryImage = Helpers::storeFileInLocal($image, $destinationPath);
+                }
                 $category->image = $categoryImage;
             }
         }

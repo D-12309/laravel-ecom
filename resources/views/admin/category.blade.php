@@ -34,6 +34,8 @@
                                             <td class=" ">{{$list->id}}</td>
                                             <td class=" ">{{$list->name}}</td>
                                            <td> <img src="/image/{{$list->image }}" width="100px"></td>
+                                        {{--    {{Storage::disk('s3')->get('images/'.$list->image)}}--}}
+                                           <td> <img src="{{Storage::disk('s3')->url('categories/'.$list->image)}}" width="100px"></td>
                                             <td class=" ">{{\Carbon\Carbon::parse($list->created_at)->format('l jS \of F Y h:i:s A')}}</td>
                                             <td class=" last"> <a
                                                     href="{{url('admin/categories/manage_category/')}}/{{$list->id}}"><i
