@@ -54,7 +54,7 @@ class CategoryController extends Controller
                     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                if (env('APP_ENV') == 'local') {
+                if (env('APP_ENV') == 'production') {
                     if (Storage::disk('s3')->exists($category->image)) {
                         Storage::disk('s3')->delete($category->image);
                     }
@@ -76,7 +76,7 @@ class CategoryController extends Controller
             $msg = "Project saved";
             if ($image = $request->file('image')) {
                 $destinationPath = 'categories';
-                if (env('APP_ENV') == 'local') {
+                if (env('APP_ENV') == 'production') {
                     $categoryImage = Helpers::storeFileInS3($image, $destinationPath);
                 } else {
                     $categoryImage = Helpers::storeFileInLocal($image, $destinationPath);
@@ -92,8 +92,7 @@ class CategoryController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $project = Project::where('id', $id)->delete();
-        Alert::error('Delete', 'project Deleted');
-        return redirect('admin/project');
+        $category = Category::where('id', $id)->delete();
+        return redirect('admin/categories');
     }
 }

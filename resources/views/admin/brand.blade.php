@@ -1,14 +1,14 @@
 @extends('admin/layout')
-@section('page_title','Category Page')
-@section('category_select','active')
+@section('page_title','Brand Page')
+@section('brand_select','active')
 @section('container')
     <!-- page content -->
     <div class="right_col" role="main" style="min-height: 1197px;">
         <div>
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Categories</h3>
-                    <a class="btn btn-primary" href="{{url('admin/categories/manage_category')}}">Add Category +</a>
+                    <h3>Brands</h3>
+                    <a class="btn btn-primary" href="{{url('admin/brands/manage_brand')}}">Add Brand +</a>
                 </div>
             </div>
             <div class="row">
@@ -20,7 +20,7 @@
                                     <thead>
                                     <tr class="headings">
                                         <th class="column-title">#</th>
-                                        <th class="column-title">Category Name</th>
+                                        <th class="column-title">Brand Name</th>
                                         <th class="column-title">Image</th>
                                         <th class="column-title">Created At</th>
                                         <th class="column-title">Action</th>
@@ -40,10 +40,10 @@
                                             @endif
                                             <td class=" ">{{\Carbon\Carbon::parse($list->created_at)->format('l jS \of F Y h:i:s A')}}</td>
                                             <td class=" last"> <a
-                                                    href="{{url('admin/categories/manage_category/')}}/{{$list->id}}"><i
+                                                    href="{{url('admin/brands/manage_brand/')}}/{{$list->id}}"><i
                                                         class="fa fa-edit"></i> <span class="text-muted"></span></a>
                                                 <a onclick="return confirm('Are you sure want to delete this record?')"
-                                                   href="{{url('admin/categories/delete/')}}/{{$list->id}}"><i
+                                                   href="{{url('admin/brands/delete/')}}/{{$list->id}}"><i
                                                         class="fa fa-remove"></i> <span class="text-muted"></span></a>
                                             </td>
                                         </tr>

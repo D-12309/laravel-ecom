@@ -9,6 +9,7 @@ trait Helpers
     {
         $generateFileName = rand('1111111111', '9999999999') . "." . $fileName->getClientOriginalExtension();
         $destinationFileUrl = $filePath . "/" . $generateFileName;
+        $filePath = $filePath."/";
         $fileName->storeAs($filePath, $generateFileName, 's3');
         return $destinationFileUrl;
     }
@@ -17,7 +18,8 @@ trait Helpers
     {
         $generateFileName = rand('1111111111', '9999999999') . "." . $fileName->getClientOriginalExtension();
         $destinationFileUrl = $filePath . "/" . $generateFileName;
-        $fileName->move($destinationFileUrl, $generateFileName);
+        $filePath = $filePath."/";
+        $fileName->move($filePath, $generateFileName);
         return $destinationFileUrl;
     }
 }
