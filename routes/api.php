@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('details', [UserController::class,'details']);
-});
+Route::post('product', [ProductController::class, 'product']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register']);
+
