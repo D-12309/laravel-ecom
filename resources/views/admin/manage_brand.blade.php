@@ -42,7 +42,9 @@
                                         <input type="file" id="is_application_submitted" name="image"
                                                class="form-control col-md-7 col-xs-12">
                                         @if(env('APP_ENV') == 'production')
-                                           <img src="{{Storage::disk('s3')->url($image)}}" width="100px">
+                                            @if (Storage::disk('s3')->exists($image)) {
+                                                <img src="{{Storage::disk('s3')->url($image)}}" width="100px">
+                                            @endif
                                         @else
                                             <img src="/{{$image }}" width="100px">
                                         @endif
