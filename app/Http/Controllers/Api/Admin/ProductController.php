@@ -13,22 +13,22 @@ class ProductController extends Controller
 {
     public $successStatus = 200;
 
-    public function category(Request $request) {
+    public function categories(Request $request) {
         $result['categories'] =  Category::all();
         return response()->json(['data'=> $result], $this-> successStatus);
     }
 
-    public function brand(Request $request) {
+    public function brands(Request $request) {
         $result['brands'] = Brand::all();
         return response()->json(['data'=> $result], $this-> successStatus);
     }
 
-    public function offer(Request $request) {
+    public function offers(Request $request) {
         $result['offers'] = Offer::all();
         return response()->json(['data'=> $result], $this-> successStatus);
     }
 
-    public function product(Request $request) {
+    public function products(Request $request) {
         $result['product'] = Product::with(['productImages','category','brand'])->get();
         return response()->json(['data'=> $result], $this-> successStatus);
     }
