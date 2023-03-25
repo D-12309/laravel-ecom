@@ -29,7 +29,7 @@ class ProductController extends Controller
     }
 
     public function products(Request $request) {
-        $result['product'] = Product::with(['productImages','category','brand'])->get();
+        $result['products'] = Product::with(['productImages','category','brand'])->get();
         return response()->json(['data'=> $result], $this-> successStatus);
     }
 }
