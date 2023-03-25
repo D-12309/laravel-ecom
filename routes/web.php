@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,15 @@ Route::group( ['prefix' => 'admin'], function () {
         Route::post('/manage_offer_process', [OfferController::class, 'manage_offer_process'])->name('offer.manage_offer_process');
         Route::get('/manage_offer/{id}', [OfferController::class, 'manage_offer']);
         Route::get('/delete/{id}', [OfferController::class, 'delete']);
+    });
+
+    Route::group( ['prefix' => 'products'], function () {
+        Route::get('/', [ProductController::class, 'index']);
+        Route::get('/manage_product', [ProductController::class, 'manage_product']);
+        Route::post('/manage_product_process', [ProductController::class, 'manage_product_process'])->name('product.manage_product_process');
+        Route::get('/manage_product/{id}', [ProductController::class, 'manage_product']);
+        Route::get('/delete/{id}', [ProductController::class, 'delete']);
+        Route::get('/product_images_delete/{paid}/{pid}',[ProductController::class,'product_images_delete']);
     });
 });
 

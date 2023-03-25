@@ -34,7 +34,7 @@
                                             <td class=" ">{{$list->id}}</td>
                                             <td class=" ">{{$list->name}}</td>
                                             @if(env('APP_ENV') == 'production')
-                                                @if (Storage::disk('s3')->exists($list->image)) {
+                                                @if (Storage::disk('s3')->exists($list->image))
                                                     <td> <img src="{{Storage::disk('s3')->url($list->image)}}" width="100px"></td>
                                                 @endif
                                             @else

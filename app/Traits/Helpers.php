@@ -3,6 +3,9 @@
 namespace App\Traits;
 
 
+use App\Models\Brand;
+use App\Models\Category;
+
 trait Helpers
 {
     public static function storeFileInS3($fileName, $filePath)
@@ -22,4 +25,13 @@ trait Helpers
         $fileName->move($filePath, $generateFileName);
         return $destinationFileUrl;
     }
+
+    public static function getCategory() {
+        return Category::pluck('name','id');
+    }
+
+    public static function getBrand() {
+        return Brand::pluck('name','id');
+    }
+
 }

@@ -55,6 +55,8 @@
                             </li>
                             <li><a href="{{url('admin/offers')}}"><i class="fa fa-edit"></i> Offers</a>
                             </li>
+                            <li><a href="{{url('admin/products')}}"><i class="fa fa-edit"></i> Products</a>
+                            </li>
 
                         </ul>
                     </div>
