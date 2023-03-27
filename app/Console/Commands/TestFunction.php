@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Admin;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class TestFunction extends Command
 {
@@ -39,11 +41,9 @@ class TestFunction extends Command
      */
     public function handle()
     {
-        $name ='20230324145651.jpg';
-        if(Storage::disk('s3')->exists('categories/'.$name)) {
-            Storage::disk('s3')->delete('categories/'.$name);
-            dd('dosne');
-        }
-        dd('done');
+        $admin = new Admin();
+        $admin->email = "admin@gmail.com";
+        $admin->password = Hash::make('admin@123');
+        $admin->save();
     }
 }

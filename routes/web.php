@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,10 +23,13 @@ Route::get('/', function () {
 });
 Route::get('sendSMS', [\App\Http\Controllers\TwilioSMSController::class, 'index']);
 
+Route::get('/',[AdminController::class,'index']);
+Route::post('admin/auth',[AdminController::class,'auth'])->name('admin.auth');
 
 
-Route::group( ['prefix' => 'admin'], function () {
+Route::group( ['middleware' => ['admin_auth'],'prefix' => 'admin'], function () {
     Route::get('/users', [UserController::class, 'index']);
+    Route::get('/dashboard', [UserController::class, 'index']);
     Route::group( ['prefix' => 'categories'], function () {
         Route::get('/', [CategoryController::class, 'index']);
         Route::get('/manage_category', [CategoryController::class, 'manage_category']);
@@ -57,6 +61,14 @@ Route::group( ['prefix' => 'admin'], function () {
         Route::get('/manage_product/{id}', [ProductController::class, 'manage_product']);
         Route::get('/delete/{id}', [ProductController::class, 'delete']);
         Route::get('/product_images_delete/{paid}/{pid}',[ProductController::class,'product_images_delete']);
+    });
+
+    Route::get('/logout', function () {
+        session()->forget('ADMIN_LOGIN');
+        session()->forget('ADMIN_ID');
+        session()->forget('ADMIN_EMAIL');
+        session()->flash('error','Logout successfully');
+        return redirect('/');
     });
 });
 

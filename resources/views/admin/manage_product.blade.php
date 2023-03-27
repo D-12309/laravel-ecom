@@ -41,7 +41,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" id="is_application_submitted" name="qty"
                                                class="form-control col-md-7 col-xs-12"
-                                               value="{{$qty ? $qty : old('qty')}}" required >
+                                               value="{{$qty ? $qty : old('qty')}}" required>
                                         @error('qty')
                                         <span style="color: red">{{$message}}</span>
                                         @enderror
@@ -56,7 +56,7 @@
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" id="is_application_submitted" name="sku"
                                                class="form-control col-md-7 col-xs-12"
-                                               value="{{$sku ? $sku : old('sku')}}" required >
+                                               value="{{$sku ? $sku : old('sku')}}" required>
                                         @error('sku')
                                         <span style="color: red">{{$message}}</span>
                                         @enderror
@@ -103,7 +103,8 @@
                                         <select type="text" id="is_application_submitted" name="brand_id"
                                                 class="form-control col-md-7 col-xs-12" required>
                                             @foreach($brands as $Key=>$brand)
-                                                <option value="{{$Key}}" {{$Key==$brand_id ? "selected" : ''}}>{{$brand}}</option>
+                                                <option
+                                                    value="{{$Key}}" {{$Key==$brand_id ? "selected" : ''}}>{{$brand}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -118,7 +119,8 @@
                                         <select type="text" id="is_application_submitted" name="category_id"
                                                 class="form-control col-md-7 col-xs-12" required>
                                             @foreach($categories as $Key=>$category)
-                                                <option value="{{$Key}}"  {{$Key==$category_id  ? "selected" : ''}}>{{$category}}</option>
+                                                <option
+                                                    value="{{$Key}}" {{$Key==$category_id  ? "selected" : ''}}>{{$category}}</option>
                                             @endforeach
 
                                         </select>
@@ -130,9 +132,9 @@
                                            for="Application Submitted">Key Highlight<span
                                             class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-9 col-sm-6 col-xs-12">
                                         <textarea type="text" id="is_application_submitted" name="key_highlight"
-                                                  class="form-control col-md-7 col-xs-12"
+                                                  class="ckeditor form-control col-md-7 col-xs-12"
                                         >{{$key_highlight}}</textarea>
                                     </div>
                                 </div>
@@ -142,9 +144,9 @@
                                            for="Application Submitted">Description<span
                                             class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-9 col-sm-6 col-xs-12">
                                         <textarea type="text" id="is_application_submitted" name="description"
-                                                  class="form-control col-md-7 col-xs-12" required
+                                                  class="ckeditor form-control col-md-7 col-xs-12" required
                                         >{{$description}}</textarea>
                                     </div>
                                 </div>
@@ -154,59 +156,114 @@
                                            for="Application Submitted">Specification<span
                                             class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-9 col-sm-6 col-xs-12">
                                         <textarea type="text" id="is_application_submitted" name="specification"
-                                                  class="form-control col-md-7 col-xs-12"
+                                                  class="ckeditor form-control col-md-7 col-xs-12"
                                         >{{$specification}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                           for="Application Submitted">Legal Disclaimer<span
+                                           for="legal_disclaimer">Legal Disclaimer<span
                                             class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <textarea type="text" id="is_application_submitted" name="legal_disclaimer"
-                                                  class="form-control col-md-7 col-xs-12"
+                                    <div class="col-md-9 col-sm-6 col-xs-12">
+                                        <textarea type="text" id="legal_disclaimer" name="legal_disclaimer"
+                                                  class="ckeditor form-control col-md-7 col-xs-12"
                                         >{{$legal_disclaimer}}</textarea>
                                     </div>
                                 </div>
+                                {{-- <div class="col-lg-12">
+                                     <div class="form-group">
+                                         <div class="row" id="product_images_box">
+                                             @php
+                                                 $loop_count_num=1;
+                                             @endphp
+                                             @foreach($productImagesArr as $key=>$val)
+                                                 @php
+                                                     $loop_count_prev=$loop_count_num;
+                                                 @endphp
+                                                 <input id="piid" type="hidden" name="piid[]"
+                                                        value="{{$val['id']}}">
+                                                 <div class="col-md-4 product_images_{{$loop_count_num++}}">
+                                                     <label for="images" class="control-label mb-1">
+                                                         Image</label>
+                                                     <input id="images" name="images[]" type="file"
+                                                            class="form-control" aria-required="true"
+                                                            aria-invalid="false">
+                                                     @error('images')
+                                                     <span style="color: red">{{$message}}</span>
+                                                     @enderror
+                                                     @if(env('APP_ENV') == 'production')
+                                                         @if($val['image']!='' && Storage::disk('s3')->exists($val['image']))
+                                                             <a href="/{{Storage::disk('s3')->url($val['image'])}}" target="_blank"><img
+                                                                     width="100px" src="{{Storage::disk('s3')->url($val['image'])}}"/></a>
+                                                         @endif
+                                                     @else
+                                                         @if($val['image']!='')
+                                                             <a href="/{{$val['image']}}" target="_blank"><img
+                                                                     width="100px" src="/{{$val['image']}}"/></a>
+                                                         @endif
+                                                     @endif
+                                                 </div>
 
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <div class="row" id="product_images_box">
-                                            @php
-                                                $loop_count_num=1;
-                                            @endphp
-                                            @foreach($productImagesArr as $key=>$val)
-                                                @php
-                                                    $loop_count_prev=$loop_count_num;
-                                                @endphp
-                                                <input id="piid" type="hidden" name="piid[]"
-                                                       value="{{$val['id']}}">
-                                                <div class="col-md-4 product_images_{{$loop_count_num++}}">
-                                                    <label for="images" class="control-label mb-1">
-                                                        Image</label>
+                                                 <div class="col-md-2">
+                                                     <label for="images" class="control-label mb-1">
+                                                         &nbsp;&nbsp;&nbsp;</label>
+
+                                                     @if($loop_count_num==2)
+                                                         <button type="button" class="btn btn-success btn-lg"
+                                                                 onclick="add_image_more()">
+                                                             <i class="fa fa-plus"></i>&nbsp; Add
+                                                         </button>
+                                                     @else
+                                                         <a href="{{url('admin/products/product_images_delete/')}}/{{$val['id']}}/{{$id}}">
+                                                             <button type="button" class="btn btn-danger btn-lg">
+                                                                 <i class="fa fa-minus"></i>&nbsp; Remove
+                                                             </button>
+                                                         </a>
+                                                     @endif
+                                                 </div>
+                                             @endforeach
+                                         </div>
+                                     </div>
+                                 </div>--}}
+                                <div id="product_images_box">
+                                    @php
+                                        $loop_count_num=1;
+                                    @endphp
+                                    @foreach($productImagesArr as $key=>$val)
+                                        @php
+                                            $loop_count_prev=$loop_count_num;
+                                        @endphp
+                                        <div class="form-group">
+                                            <input id="piid" type="hidden" name="piid[]"
+                                                   value="{{$val['id']}}">
+                                            <div class="product_images_{{$loop_count_num++}}">
+                                                <label for="images" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                    Image</label>
+                                                <div class="col-md-3 col-sm-6 col-xs-12">
                                                     <input id="images" name="images[]" type="file"
                                                            class="form-control" aria-required="true"
                                                            aria-invalid="false">
-                                                    @error('images')
-                                                    <span style="color: red">{{$message}}</span>
-                                                    @enderror
-                                                    @if(env('APP_ENV') == 'production')
-                                                        @if($val['image']!='' && Storage::disk('s3')->exists($val['image']))
-                                                            <a href="/{{Storage::disk('s3')->url($val['image'])}}" target="_blank"><img
-                                                                    width="100px" src="{{Storage::disk('s3')->url($val['image'])}}"/></a>
-                                                        @endif
-                                                    @else
-                                                        @if($val['image']!='')
-                                                            <a href="/{{$val['image']}}" target="_blank"><img
-                                                                    width="100px" src="/{{$val['image']}}"/></a>
-                                                        @endif
-                                                    @endif
                                                 </div>
-
+                                                @error('images')
+                                                <span style="color: red">{{$message}}</span>
+                                                @enderror
+                                                @if(env('APP_ENV') == 'production')
+                                                    @if($val['image']!='' && Storage::disk('s3')->exists($val['image']))
+                                                        <a href="/{{Storage::disk('s3')->url($val['image'])}}"
+                                                           target="_blank"><img
+                                                                width="100px"
+                                                                src="{{Storage::disk('s3')->url($val['image'])}}"/></a>
+                                                    @endif
+                                                @else
+                                                    @if($val['image']!='')
+                                                        <a href="/{{$val['image']}}" target="_blank"><img
+                                                                width="100px" src="/{{$val['image']}}"/></a>
+                                                    @endif
+                                                @endif
                                                 <div class="col-md-2">
                                                     <label for="images" class="control-label mb-1">
                                                         &nbsp;&nbsp;&nbsp;</label>
@@ -224,9 +281,9 @@
                                                         </a>
                                                     @endif
                                                 </div>
+                                            </div>
                                             @endforeach
                                         </div>
-                                    </div>
                                 </div>
 
 
@@ -265,18 +322,17 @@
             </div>
         </div>
     </div>
-
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script>
         var loop_count = 1;
-
-
         var loop_image_count = 1;
 
         function add_image_more() {
             loop_image_count++;
-            var html = '<input id="piid" type="hidden" name="piid[]" value=""><div class="col-md-4 product_images_' + loop_image_count + '"><label for="images" class="control-label mb-1"> Image</label><input id="images" name="images[]" type="file" class="form-control" aria-required="true" aria-invalid="false" required></div>';
+            console.log(loop_image_count);
+            var html = '<div class="form-group product_images_' + loop_image_count + '"><input id="piid" type="hidden" name="piid[]" value=""><div><label for="images" class="control-label col-md-3 col-sm-3 col-xs-12"> Image</label><div class="col-md-3 col-sm-6 col-xs-12"><input id="images" name="images[]" type="file" class="form-control" aria-required="true" aria-invalid="false" required></div></div>';
             //product_images_box
-            html += '<div class="col-md-2 product_images_' + loop_image_count + '""><label for="attr_image" class="control-label mb-1"> &nbsp;&nbsp;&nbsp;</label><button type="button" class="btn btn-danger btn-lg" onclick=remove_image_more("' + loop_image_count + '")><i class="fa fa-minus"></i>&nbsp; Remove</button></div>';
+            html += '<div class="col-md-2 product_images_' + loop_image_count + '""><label for="attr_image" class="control-label mb-1"> &nbsp;&nbsp;&nbsp;</label><button type="button" class="btn btn-danger btn-lg" onclick=remove_image_more("' + loop_image_count + '")><i class="fa fa-minus"></i>&nbsp; Remove</button></div></div>';
             jQuery('#product_images_box').append(html)
         }
 
@@ -284,9 +340,10 @@
             jQuery('.product_images_' + count).remove();
         }
 
-        CKEDITOR.replace('short_desc');
-        CKEDITOR.replace('desc');
-        CKEDITOR.replace('technical_specification');
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+
     </script>
     <!-- /page content -->
 @endsection
