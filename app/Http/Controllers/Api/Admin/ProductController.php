@@ -47,4 +47,9 @@ class ProductController extends Controller
         $result['bestSelling'] = Product::with(['productImages'])->select('id', 'name', 'qty', 'sku', 'mrp', 'price')->get();
         return response()->json(['data' => $result], $this->successStatus);
     }
+
+    public function recentView(Request $request) {
+        $result['recentView'] = Product::with(['productImages'])->select('id', 'name', 'qty', 'sku', 'mrp', 'price')->get();
+        return response()->json(['data' => $result], $this->successStatus);
+    }
 }
