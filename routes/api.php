@@ -26,4 +26,6 @@ Route::get('products', [ProductController::class, 'products']);
 Route::get('categories', [ProductController::class, 'categories']);
 Route::get('brands', [ProductController::class, 'brands']);
 Route::get('offers', [ProductController::class, 'offers']);
+Route::get('trending', [ProductController::class, 'trending']);
+Route::get('best-selling', [ProductController::class, 'bestSelling']);
 
