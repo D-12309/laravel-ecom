@@ -174,61 +174,6 @@
                                         >{{$legal_disclaimer}}</textarea>
                                     </div>
                                 </div>
-                                {{-- <div class="col-lg-12">
-                                     <div class="form-group">
-                                         <div class="row" id="product_images_box">
-                                             @php
-                                                 $loop_count_num=1;
-                                             @endphp
-                                             @foreach($productImagesArr as $key=>$val)
-                                                 @php
-                                                     $loop_count_prev=$loop_count_num;
-                                                 @endphp
-                                                 <input id="piid" type="hidden" name="piid[]"
-                                                        value="{{$val['id']}}">
-                                                 <div class="col-md-4 product_images_{{$loop_count_num++}}">
-                                                     <label for="images" class="control-label mb-1">
-                                                         Image</label>
-                                                     <input id="images" name="images[]" type="file"
-                                                            class="form-control" aria-required="true"
-                                                            aria-invalid="false">
-                                                     @error('images')
-                                                     <span style="color: red">{{$message}}</span>
-                                                     @enderror
-                                                     @if(env('APP_ENV') == 'production')
-                                                         @if($val['image']!='' && Storage::disk('s3')->exists($val['image']))
-                                                             <a href="/{{Storage::disk('s3')->url($val['image'])}}" target="_blank"><img
-                                                                     width="100px" src="{{Storage::disk('s3')->url($val['image'])}}"/></a>
-                                                         @endif
-                                                     @else
-                                                         @if($val['image']!='')
-                                                             <a href="/{{$val['image']}}" target="_blank"><img
-                                                                     width="100px" src="/{{$val['image']}}"/></a>
-                                                         @endif
-                                                     @endif
-                                                 </div>
-
-                                                 <div class="col-md-2">
-                                                     <label for="images" class="control-label mb-1">
-                                                         &nbsp;&nbsp;&nbsp;</label>
-
-                                                     @if($loop_count_num==2)
-                                                         <button type="button" class="btn btn-success btn-lg"
-                                                                 onclick="add_image_more()">
-                                                             <i class="fa fa-plus"></i>&nbsp; Add
-                                                         </button>
-                                                     @else
-                                                         <a href="{{url('admin/products/product_images_delete/')}}/{{$val['id']}}/{{$id}}">
-                                                             <button type="button" class="btn btn-danger btn-lg">
-                                                                 <i class="fa fa-minus"></i>&nbsp; Remove
-                                                             </button>
-                                                         </a>
-                                                     @endif
-                                                 </div>
-                                             @endforeach
-                                         </div>
-                                     </div>
-                                 </div>--}}
                                 <div id="product_images_box">
                                     @php
                                         $loop_count_num=1;
@@ -241,7 +186,8 @@
                                             <input id="piid" type="hidden" name="piid[]"
                                                    value="{{$val['id']}}">
                                             <div class="product_images_{{$loop_count_num++}}">
-                                                <label for="images" class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                <label for="images"
+                                                       class="control-label col-md-3 col-sm-3 col-xs-12">
                                                     Image</label>
                                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                                     <input id="images" name="images[]" type="file"
@@ -261,7 +207,8 @@
                                                 @else
                                                     @if($val['image']!='')
                                                         <a href="/{{$val['image']}}" target="_blank"><img
-                                                                width="100px" src="/{{$val['image']}}"/></a>
+                                                                width="100px" src="/{{$val['image']}}"
+                                                                style="border: 10px solid black; border-radius: 50%; "/></a>
                                                     @endif
                                                 @endif
                                                 <div class="col-md-2">
@@ -275,43 +222,22 @@
                                                         </button>
                                                     @else
                                                         <a href="{{url('admin/products/product_images_delete/')}}/{{$val['id']}}/{{$id}}">
-                                                            <button type="button" class="btn btn-danger btn-lg">
+                                                            <button type="button"
+                                                                    class="btn btn-danger btn-lg">
                                                                 <i class="fa fa-minus"></i>&nbsp; Remove
                                                             </button>
                                                         </a>
                                                     @endif
                                                 </div>
                                             </div>
-                                            @endforeach
                                         </div>
+                                    @endforeach
                                 </div>
-
-
-                                {{--<div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                           for="Application Submitted">Product Image<span
-                                            class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="file" id="is_application_submitted" name="image"
-                                               class="form-control col-md-7 col-xs-12">
-                                        @if(env('APP_ENV') == 'production')
-                                            @if (Storage::disk('s3')->exists($image))
-                                                <img src="{{Storage::disk('s3')->url($image)}}" width="100px">
-                                            @endif
-                                        @else
-                                            <img src="/{{$image }}" width="100px">
-                                        @endif
-                                        @error('image')
-                                        <span style="color: red">{{$message}}</span>
-                                        @enderror
-                                    </div>
-                                </div>--}}
-
                                 <input type="hidden" name="id" value="{{$id}}"/>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <a class="btn btn-primary" href="{{url('admin/products')}}">Cancel</a>
+                                        <a class="btn btn-primary"
+                                           href="{{url('admin/products')}}">Cancel</a>
                                         <button type="submit" class="btn btn-success">Save Change</button>
                                     </div>
                                 </div>

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Admin;
+use App\Models\Faq;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -41,9 +42,15 @@ class TestFunction extends Command
      */
     public function handle()
     {
-        $admin = new Admin();
+        Faq::create([
+            'question' => 'Use service data to identify your most common questions.',
+            'answer' => 'Your FAQ page should address the most common questions customers have about your products, services, and brand as a whole. The best way to identify those questions is to tap into your customer service data and see which problems customers are consistently reaching out to you with.'
+        ]);
+       /* $admin = new Admin();
         $admin->email = "admin@gmail.com";
+        $admin->name = "admin";
         $admin->password = Hash::make('admin@123');
-        $admin->save();
+        $admin->type = 1;
+        $admin->save();*/
     }
 }

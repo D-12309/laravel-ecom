@@ -8,7 +8,7 @@
             <div class="page-title">
                 <div class="title_left">
                     <h3>Offers</h3>
-                    <a class="btn btn-primary" href="{{url('admin/offers/manage_offer')}}">Add <Offer></Offer> +</a>
+                    <a class="btn btn-primary" href="{{url('admin/offers/manage_offer')}}">Add Offer +</a>
                 </div>
             </div>
             <div class="row">

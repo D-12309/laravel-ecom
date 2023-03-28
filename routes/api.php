@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\Admin\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +30,5 @@ Route::get('offers', [ProductController::class, 'offers']);
 Route::get('trending', [ProductController::class, 'trending']);
 Route::get('best-selling', [ProductController::class, 'bestSelling']);
 Route::get('recent-view', [ProductController::class, 'recentView']);
+Route::get('faqs', [FAQController::class, 'faqs']);
 
