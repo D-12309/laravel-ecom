@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
+use App\Models\PrivacyPolicy;
+use App\Models\TermCondition;
 use Illuminate\Support\Facades\Request;
 
 
@@ -14,4 +16,15 @@ class FAQController extends Controller
         $result['faqs'] = Faq::all();
         return response()->json(['data' => $result], $this->successStatus);
     }
+
+    public function privacyPolicy(Request $request) {
+        $result['privacyPolicy'] = PrivacyPolicy::first();
+        return response()->json(['data' => $result], $this->successStatus);
+    }
+
+    public function termCondition(Request $request) {
+        $result['termCondition'] = TermCondition::first();
+        return response()->json(['data' => $result], $this->successStatus);
+    }
+
 }

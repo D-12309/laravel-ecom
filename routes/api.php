@@ -31,4 +31,6 @@ Route::get('trending', [ProductController::class, 'trending']);
 Route::get('best-selling', [ProductController::class, 'bestSelling']);
 Route::get('recent-view', [ProductController::class, 'recentView']);
 Route::get('faqs', [FAQController::class, 'faqs']);
+Route::get('privacy-policy', [FAQController::class, 'privacyPolicy']);
+Route::get('Terms-and-condition', [FAQController::class, 'termCondition']);
 
